@@ -1,5 +1,6 @@
 ﻿using Ecommerce_Product_API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Ecommerce_Product_API.Contexts;
 
@@ -14,7 +15,7 @@ public partial class HarvestContext : DbContext
     {
     }
 
-    public virtual DbSet<Attribute> Attributes { get; set; }
+    public virtual DbSet<Attribute_> Attributes { get; set; }
 
     public virtual DbSet<AttributeValue> AttributeValues { get; set; }
 
@@ -30,7 +31,7 @@ public partial class HarvestContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Attribute>(entity =>
+        modelBuilder.Entity<Attribute_>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("attributes_pkey");
 

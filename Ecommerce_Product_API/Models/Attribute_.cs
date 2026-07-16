@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ecommerce_Product_API.Models;
 
-public partial class Attribute
+public partial class Attribute_
 {
     public int Id { get; set; }
 
