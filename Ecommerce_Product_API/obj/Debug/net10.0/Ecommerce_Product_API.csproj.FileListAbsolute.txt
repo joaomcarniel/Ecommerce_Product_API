@@ -1,8 +1,0 @@
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.csproj.AssemblyReference.cache
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.AssemblyInfoInputs.cache
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.AssemblyInfo.cs
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.csproj.CoreCompileInputs.cache
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\joao_\source\repos\Ecommerce_Product_API\Ecommerce_Product_API\obj\Debug\net10.0\Ecommerce_Product_API.MvcApplicationPartsAssemblyInfo.cache
