@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Ecommerce_Product_API.Models;
+﻿namespace Ecommerce_Product_API.Models;
 
 public partial class ProductVariant
 {
