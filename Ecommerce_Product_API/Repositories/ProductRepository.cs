@@ -27,5 +27,19 @@ namespace Ecommerce_Product_API.Repositories
         {
             return await _context.ProductVariants.Where(x => x.ProductId == productId).ToListAsync();
         }
+
+        public async Task UpdatePriceBySku(string sku, decimal basePrice, decimal salePrice)
+        {
+            var productVariation = await _context.ProductVariants.FirstOrDefaultAsync(p => p.Sku == sku);
+
+            if (productVariation == null)
+                throw new Exception("Product Variation not found.");
+
+            productVariation.BasePrice = basePrice;
+            productVariation.SalePrice = salePrice;
+
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -46,5 +46,33 @@ namespace Ecommerce_Product_API.Services
                 throw new Exception ($"Error retrieving product variant by SKU: {ex.Message}");
             }
         }
+
+        public async Task<List<PriceUpdateResponse>> UpdateProductVariationPrice(List<PriceUpdateBySkuDTO> prices)
+        {
+            var response = new List<PriceUpdateResponse>();
+            try
+            {
+                foreach(var price in prices)
+                {
+                    var productResponse = new PriceUpdateResponse();
+                    if (string.IsNullOrEmpty(price.Sku))
+                    {
+                        productResponse.Response = "Error: SKU cannot be empty.";
+                        response.Add(productResponse);
+                        continue;
+                    }
+                    
+                    await _repository.UpdatePriceBySku(price.Sku, price.BasePrice, price.SalePrice);
+                    productResponse.Sku = price.Sku;
+                    productResponse.Response = "Price updated successfully.";
+                    response.Add(productResponse);
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error updating product variant prices: {ex.Message}");
+            }
+        }
     }
 }

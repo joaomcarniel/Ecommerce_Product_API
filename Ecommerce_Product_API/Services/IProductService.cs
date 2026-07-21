@@ -7,5 +7,6 @@ namespace Ecommerce_Product_API.Services
     {
         Task<ProductDTO> GetAllVariationsByProduct(int productId);
         Task<List<ProductVariantDTO>> GetVariantBySKU(string sku);
+        Task<List<PriceUpdateResponse>> UpdateProductVariationPrice(List<PriceUpdateBySkuDTO> prices);
     }
 }
