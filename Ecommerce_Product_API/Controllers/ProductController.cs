@@ -46,12 +46,28 @@ namespace Ecommerce_Product_API.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateProductVariationPrice")]
-        public async Task<ActionResult<PriceUpdateResponse>> UpdateProductVariationPrice([FromBody] List<PriceUpdateBySkuDTO> Prices)
+        [Route("UpdatePriceBySku")]
+        public async Task<ActionResult<PriceUpdateResponse>> UpdatePriceBySku([FromBody] List<PriceUpdateBySkuDTO> Prices)
         {
             try
             {
-                var result = await productService.UpdateProductVariationPrice(Prices);
+                var result = await productService.UpdatePriceBySku(Prices);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+        [HttpPut]
+        [Route("UpdatePriceByProductId")]
+        public async Task<ActionResult<PriceUpdateResponse>> UpdatePriceByProductId([FromBody] List<PriceUpdateByProductIdDTO> Prices)
+        {
+            try
+            {
+                var result = await productService.UpdatePriceByProductId(Prices);
                 return Ok(result);
             }
             catch (Exception e)

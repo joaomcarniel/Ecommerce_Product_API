@@ -2,7 +2,7 @@
 {
     public class PriceUpdateResponse
     {
-        public string Sku { get; set; }
+        public string ProductIdentifier { get; set; }
         public string Response { get; set;  }
     }
 }

@@ -41,5 +41,21 @@ namespace Ecommerce_Product_API.Repositories
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdatePriceByProductId(int productId, decimal basePrice, decimal salePrice)
+        {
+            var productVariation = await _context.ProductVariants.Where(p => p.ProductId == productId).ToListAsync();
+
+            if (productVariation == null)
+                throw new Exception("Products not found.");
+
+            foreach(var product in productVariation)
+            {
+                product.BasePrice = basePrice;
+                product.SalePrice = salePrice;
+            }
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

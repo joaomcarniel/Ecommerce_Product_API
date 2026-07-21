@@ -47,7 +47,35 @@ namespace Ecommerce_Product_API.Services
             }
         }
 
-        public async Task<List<PriceUpdateResponse>> UpdateProductVariationPrice(List<PriceUpdateBySkuDTO> prices)
+        public async Task<List<PriceUpdateResponse>> UpdatePriceByProductId(List<PriceUpdateByProductIdDTO> prices)
+        {
+            var response = new List<PriceUpdateResponse>();
+            try
+            {
+                foreach (var price in prices)
+                {
+                    var productResponse = new PriceUpdateResponse();
+                    if (price.ProductId == 0)
+                    {
+                        productResponse.Response = "Error: product Id cannot be 0.";
+                        response.Add(productResponse);
+                        continue;
+                    }
+
+                    await _repository.UpdatePriceByProductId(price.ProductId, price.BasePrice, price.SalePrice);
+                    productResponse.ProductIdentifier = $"{price.ProductId}";
+                    productResponse.Response = "Price updated successfully.";
+                    response.Add(productResponse);
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error updating product prices: {ex.Message}");
+            }
+        }
+
+        public async Task<List<PriceUpdateResponse>> UpdatePriceBySku(List<PriceUpdateBySkuDTO> prices)
         {
             var response = new List<PriceUpdateResponse>();
             try
@@ -63,7 +91,7 @@ namespace Ecommerce_Product_API.Services
                     }
                     
                     await _repository.UpdatePriceBySku(price.Sku, price.BasePrice, price.SalePrice);
-                    productResponse.Sku = price.Sku;
+                    productResponse.ProductIdentifier = price.Sku;
                     productResponse.Response = "Price updated successfully.";
                     response.Add(productResponse);
                 }
