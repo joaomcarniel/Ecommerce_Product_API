@@ -9,5 +9,6 @@ namespace Ecommerce_Product_API.Repositories
         Task<List<ProductVariant>> GetAllVariantsByProductId(int productId);
         Task UpdatePriceBySku(string sku, decimal basePrice, decimal salePrice);
         Task UpdatePriceByProductId(int productId, decimal basePrice, decimal salePrice);
+        Task UpdateStockBySku(string sku, int stock);
     }
 }

@@ -47,7 +47,7 @@ namespace Ecommerce_Product_API.Controllers
 
         [HttpPut]
         [Route("UpdatePriceBySku")]
-        public async Task<ActionResult<PriceUpdateResponse>> UpdatePriceBySku([FromBody] List<PriceUpdateBySkuDTO> Prices)
+        public async Task<ActionResult<ProductUpdateResponse>> UpdatePriceBySku([FromBody] List<PriceUpdateBySkuDTO> Prices)
         {
             try
             {
@@ -63,11 +63,26 @@ namespace Ecommerce_Product_API.Controllers
 
         [HttpPut]
         [Route("UpdatePriceByProductId")]
-        public async Task<ActionResult<PriceUpdateResponse>> UpdatePriceByProductId([FromBody] List<PriceUpdateByProductIdDTO> Prices)
+        public async Task<ActionResult<ProductUpdateResponse>> UpdatePriceByProductId([FromBody] List<PriceUpdateByProductIdDTO> Prices)
         {
             try
             {
                 var result = await productService.UpdatePriceByProductId(Prices);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpdateStockBySku")]
+        public async Task<ActionResult<ProductUpdateResponse>> UpdateStockBySku([FromBody] List<StockUpdateBySkuDTO> Stocks)
+        {
+            try
+            {
+                var result = await productService.UpdateStockBySky(Stocks);
                 return Ok(result);
             }
             catch (Exception e)

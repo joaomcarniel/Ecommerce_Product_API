@@ -37,6 +37,7 @@ namespace Ecommerce_Product_API.Repositories
 
             productVariation.BasePrice = basePrice;
             productVariation.SalePrice = salePrice;
+            productVariation.UpdateDate = DateTime.UtcNow;
 
 
             await _context.SaveChangesAsync();
@@ -53,9 +54,22 @@ namespace Ecommerce_Product_API.Repositories
             {
                 product.BasePrice = basePrice;
                 product.SalePrice = salePrice;
+                product.UpdateDate = DateTime.UtcNow;
             }
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateStockBySku(string sku, int stock)
+        {
+            var productVariation = await _context.ProductVariants.FirstOrDefaultAsync(p => p.Sku == sku);
+
+            if (productVariation == null)
+                throw new Exception("Product Variation not found.");
+
+            productVariation.Stock = stock;
+            productVariation.UpdateDate = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Ecommerce_Product_API.DTOs;
 using Ecommerce_Product_API.Models;
 using Ecommerce_Product_API.Repositories;
+using System.Diagnostics;
 
 namespace Ecommerce_Product_API.Services
 {
@@ -47,14 +48,14 @@ namespace Ecommerce_Product_API.Services
             }
         }
 
-        public async Task<List<PriceUpdateResponse>> UpdatePriceByProductId(List<PriceUpdateByProductIdDTO> prices)
+        public async Task<List<ProductUpdateResponse>> UpdatePriceByProductId(List<PriceUpdateByProductIdDTO> prices)
         {
-            var response = new List<PriceUpdateResponse>();
+            var response = new List<ProductUpdateResponse>();
             try
             {
                 foreach (var price in prices)
                 {
-                    var productResponse = new PriceUpdateResponse();
+                    var productResponse = new ProductUpdateResponse();
                     if (price.ProductId == 0)
                     {
                         productResponse.Response = "Error: product Id cannot be 0.";
@@ -75,14 +76,14 @@ namespace Ecommerce_Product_API.Services
             }
         }
 
-        public async Task<List<PriceUpdateResponse>> UpdatePriceBySku(List<PriceUpdateBySkuDTO> prices)
+        public async Task<List<ProductUpdateResponse>> UpdatePriceBySku(List<PriceUpdateBySkuDTO> prices)
         {
-            var response = new List<PriceUpdateResponse>();
+            var response = new List<ProductUpdateResponse>();
             try
             {
                 foreach(var price in prices)
                 {
-                    var productResponse = new PriceUpdateResponse();
+                    var productResponse = new ProductUpdateResponse();
                     if (string.IsNullOrEmpty(price.Sku))
                     {
                         productResponse.Response = "Error: SKU cannot be empty.";
@@ -100,6 +101,34 @@ namespace Ecommerce_Product_API.Services
             catch (Exception ex)
             {
                 throw new Exception($"Error updating product variant prices: {ex.Message}");
+            }
+        }
+
+        public async Task<List<ProductUpdateResponse>> UpdateStockBySky(List<StockUpdateBySkuDTO> stocks)
+        {
+            var response = new List<ProductUpdateResponse>();
+            try
+            {
+                foreach (var stock in stocks)
+                {
+                    var productResponse = new ProductUpdateResponse();
+                    if (string.IsNullOrEmpty(stock.Sku))
+                    {
+                        productResponse.Response = "Error: SKU cannot be empty.";
+                        response.Add(productResponse);
+                        continue;
+                    }
+
+                    await _repository.UpdateStockBySku(stock.Sku, stock.Stock);
+                    productResponse.ProductIdentifier = stock.Sku;
+                    productResponse.Response = "Stock updated successfully.";
+                    response.Add(productResponse);
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error updating product variant stock: {ex.Message}");
             }
         }
     }
