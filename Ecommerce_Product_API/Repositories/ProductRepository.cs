@@ -1,4 +1,5 @@
 ﻿using Ecommerce_Product_API.Contexts;
+using Ecommerce_Product_API.DTOs;
 using Ecommerce_Product_API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -70,6 +71,35 @@ namespace Ecommerce_Product_API.Repositories
             productVariation.UpdateDate = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<AttributesDto> GetAttributesBySku(string sku)
+        {
+            AttributesDto response = new AttributesDto();
+            response.attributes = new List<AttributeValueDto>();
+            response.sku = sku;
+            var attributes = await (
+                from a in _context.ProductVariants
+                join b in _context.VariantAttributeValues on a.VariantId equals b.VariantId
+                join c in _context.AttributeValues on b.AttributeValueId equals c.Id
+                join d in _context.Attributes on c.AttributeId equals d.Id
+                where a.Sku == "TSHIRT-RED-M"
+                select new
+                {
+                    AttributeType = d.Name,
+                    AttributeValue = c.AttributeValue1
+                }
+            ).ToListAsync();
+            foreach(var attribute in attributes)
+            {
+                var attributeDto = new AttributeValueDto
+                {
+                    attribute = attribute.AttributeType,
+                    value = attribute.AttributeValue
+                }; 
+                response.attributes.Add(attributeDto);
+            }
+            return response;
         }
     }
 }

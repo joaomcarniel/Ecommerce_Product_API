@@ -1,4 +1,5 @@
 ﻿using Ecommerce_Product_API.DTOs;
+using Ecommerce_Product_API.Models;
 using Ecommerce_Product_API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,21 @@ namespace Ecommerce_Product_API.Controllers
                 return Ok(product);
             }
             catch(Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAttributesBySku")]
+        public async Task<ActionResult<AttributesDto>> GetAttributesBySku([FromHeader] string Sku)
+        {
+            try
+            {
+                var response = await productService.GetAttributesBySku(Sku);
+                return Ok(response);
+            }
+            catch (Exception e)
             {
                 return BadRequest(e);
             }
@@ -90,6 +106,5 @@ namespace Ecommerce_Product_API.Controllers
                 return BadRequest(e);
             }
         }
-
     }
 }

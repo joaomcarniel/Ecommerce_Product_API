@@ -6,6 +6,7 @@ namespace Ecommerce_Product_API.Services
     public interface IProductService
     {
         Task<ProductDTO> GetAllVariationsByProduct(int productId);
+        Task<AttributesDto> GetAttributesBySku(string sku);
         Task<List<ProductVariantDTO>> GetVariantBySKU(string sku);
         Task<List<ProductUpdateResponse>> UpdatePriceByProductId(List<PriceUpdateByProductIdDTO> prices);
         Task<List<ProductUpdateResponse>> UpdatePriceBySku(List<PriceUpdateBySkuDTO> prices);

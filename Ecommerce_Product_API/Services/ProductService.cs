@@ -34,6 +34,18 @@ namespace Ecommerce_Product_API.Services
             }
         }
 
+        public async Task<AttributesDto> GetAttributesBySku(string sku)
+        {
+            try
+            {
+                return await _repository.GetAttributesBySku(sku);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error retrieving all attributes of product: {ex.Message}");
+            }
+        }
+
         public async Task<List<ProductVariantDTO>> GetVariantBySKU(string sku)
         {
             try

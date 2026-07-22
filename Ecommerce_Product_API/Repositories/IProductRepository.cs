@@ -1,4 +1,5 @@
-﻿using Ecommerce_Product_API.Models;
+﻿using Ecommerce_Product_API.DTOs;
+using Ecommerce_Product_API.Models;
 
 namespace Ecommerce_Product_API.Repositories
 {
@@ -10,5 +11,6 @@ namespace Ecommerce_Product_API.Repositories
         Task UpdatePriceBySku(string sku, decimal basePrice, decimal salePrice);
         Task UpdatePriceByProductId(int productId, decimal basePrice, decimal salePrice);
         Task UpdateStockBySku(string sku, int stock);
+        Task<AttributesDto> GetAttributesBySku(string sku);
     }
 }
